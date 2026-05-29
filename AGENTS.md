@@ -2,24 +2,22 @@
 
 ## Cursor Cloud specific instructions
 
-This is a TypeScript library/CLI for converting HTML to Markdown, built on [turndown](https://github.com/mixmark-io/turndown).
+This is a Next.js (App Router) web app that converts HTML to Markdown, using Turndown with GFM support. All conversion runs client-side — no server API.
 
 ### Commands
 
-All commands use `pnpm` (not npm):
+All commands use `pnpm` (not npm). See `package.json` scripts and `README.md` for full details.
 
 | Task | Command |
 |------|---------|
 | Install deps | `pnpm install` |
-| Lint | `pnpm run lint` |
-| Type check | `pnpm run typecheck` |
-| Test | `pnpm run test` |
-| Build | `pnpm run build` |
-| Dev server (web) | `pnpm run dev` |
+| Dev server | `pnpm dev` → `http://localhost:3000` |
+| Lint | `pnpm lint` |
+| Build | `pnpm build` |
+| Start (prod) | `pnpm start` |
 
 ### Notes
 
-- The project uses ESM (`"type": "module"` in `package.json`) — imports must use `.js` extensions even for `.ts` source files.
-- The `turndown` library adds extra spaces in list items (e.g., `-   Item` instead of `- Item`). This is expected behavior, not a bug.
-- After building, the CLI can be tested with: `echo '<h1>Test</h1>' | node dist/cli.js`
-- `pnpm run dev` starts Vite on `http://localhost:5173/` for browser-based testing of the converter.
+- Tailwind CSS v4 is used via `@tailwindcss/postcss` (configured in `postcss.config.mjs`).
+- The converter logic lives in `src/lib/markdownConverter.ts` and uses a singleton `TurndownService` with GFM plugin.
+- No automated tests exist yet. Verify changes by running `pnpm dev` and testing in the browser.
