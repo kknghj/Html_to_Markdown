@@ -28,3 +28,18 @@ export function convertHtmlToMarkdown(html: string): string {
 export function convertPlainTextToMarkdown(text: string): string {
   return text.trim();
 }
+
+export function looksLikeHtml(value: string): boolean {
+  const trimmed = value.trim();
+  return /<[a-z][\s\S]*>/i.test(trimmed);
+}
+
+export function convertSourceToMarkdown(source: string): string {
+  const trimmed = source.trim();
+  if (!trimmed) {
+    return "";
+  }
+  return looksLikeHtml(trimmed)
+    ? convertHtmlToMarkdown(trimmed)
+    : convertPlainTextToMarkdown(trimmed);
+}

@@ -1,10 +1,8 @@
-"use client";
-
 import { useCallback } from "react";
 import {
   convertHtmlToMarkdown,
   convertPlainTextToMarkdown,
-} from "@/lib/markdownConverter";
+} from "../lib/markdownConverter";
 
 export function useClipboardPaste(
   onPasteConvert: (source: string, markdown: string) => void,

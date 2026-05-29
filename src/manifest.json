@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "AI Response → Markdown",
+  "version": "1.0.0",
+  "description": "Convert copied AI answers (ChatGPT, Claude, Gemini, Cursor) to clean Markdown instantly.",
+  "icons": {
+    "16": "public/icons/icon16.png",
+    "48": "public/icons/icon48.png",
+    "128": "public/icons/icon128.png"
+  },
+  "action": {
+    "default_title": "AI Response → Markdown",
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "public/icons/icon16.png",
+      "48": "public/icons/icon48.png",
+      "128": "public/icons/icon128.png"
+    }
+  },
+  "permissions": ["storage", "clipboardRead"],
+  "background": {
+    "service_worker": "src/background/serviceWorker.ts",
+    "type": "module"
+  }
+}
