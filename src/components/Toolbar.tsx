@@ -1,16 +1,14 @@
-"use client";
-
 type ToolbarProps = {
   onConvert: () => void;
   onCopy: () => void;
-  onLoadSample: () => void;
+  onClear: () => void;
   copyDisabled: boolean;
 };
 
 export function Toolbar({
   onConvert,
   onCopy,
-  onLoadSample,
+  onClear,
   copyDisabled,
 }: ToolbarProps) {
   return (
@@ -32,10 +30,10 @@ export function Toolbar({
       </button>
       <button
         type="button"
-        onClick={onLoadSample}
-        className="rounded-lg border border-dashed border-[var(--panel-border)] px-4 py-2 text-sm font-medium text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+        onClick={onClear}
+        className="rounded-lg border border-[var(--panel-border)] bg-[var(--panel-bg)] px-4 py-2 text-sm font-medium text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--foreground)]"
       >
-        Load Sample HTML
+        Clear
       </button>
     </div>
   );

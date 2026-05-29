@@ -1,0 +1,30 @@
+html,
+body,
+#root {
+  width: 680px;
+  min-width: 680px;
+  max-width: 680px;
+  min-height: 520px;
+  max-height: 600px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.popup-root {
+  display: flex;
+  flex-direction: column;
+  width: 680px;
+  height: 580px;
+  max-height: 600px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.popup-body {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0 1rem 1rem;
+}
