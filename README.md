@@ -25,7 +25,11 @@ public/
 src/
 ├── manifest.json        # MV3 manifest
 ├── background/
-│   └── serviceWorker.ts # MV3 service worker
+│   ├── serviceWorker.ts # MV3 service worker
+│   └── contextMenu.ts   # 우클릭 메뉴 등록·처리
+├── content/
+│   ├── copySelectionAsMarkdown.ts
+│   └── getSelectionHtml.ts
 ├── popup/
 │   ├── index.html
 │   ├── main.tsx
@@ -72,6 +76,8 @@ pnpm build
 
 ## 사용 방법
 
+### 팝업 방식
+
 1. AI 답변을 복사합니다 (`Ctrl+C` / `Cmd+C`).
 2. 확장프로그램 아이콘을 클릭합니다.
 3. 클립보드의 `text/html`(우선) 또는 `text/plain`이 자동으로 변환됩니다.
@@ -79,6 +85,16 @@ pnpm build
 5. **Copy Markdown**으로 결과를 클립보드에 복사합니다.
 
 팝업을 닫았다 다시 열어도 마지막 Input/Output은 `chrome.storage.local`에 저장되어 유지됩니다.
+
+### 우클릭 방식
+
+1. 웹페이지에서 변환할 영역을 드래그 선택합니다.
+2. 우클릭합니다.
+3. **Copy Selection as Markdown**을 클릭합니다.
+4. Markdown이 클립보드에 복사됩니다.
+5. Cursor / GitHub / Notion 등에 붙여넣습니다.
+
+선택 영역의 HTML 구조(제목, 리스트, 표, 코드블록, 굵게 등)를 유지한 채 변환합니다. 복사 성공 시 확장 아이콘에 잠시 **MD** 배지가 표시됩니다.
 
 ## Chrome에 Load Unpacked로 설치
 
@@ -101,7 +117,7 @@ pnpm build
    - 이름, 설명, 스크린샷 (1280×800 또는 640×400 권장)
    - 아이콘 128×128 (`public/icons/icon128.png` 사용 가능)
    - 개인정보 처리방침 URL (클립보드·storage 사용 시 명시 권장)
-6. 권한 설명: `storage`(상태 저장), `clipboardRead`(복사 내용 자동 변환)
+6. 권한 설명: `storage`(상태 저장), `clipboardRead`(복사 내용 자동 변환), `contextMenus`·`scripting`·`activeTab`(선택 영역 우클릭 변환)
 7. 심사 제출 후 승인되면 게시
 
 ### 배포 전 체크리스트
@@ -120,12 +136,13 @@ pnpm build
 - **Convert** / **Clear**
 - `chrome.storage.local` 상태 유지
 - 팝업 열 때 클립보드 자동 읽기 및 변환
+- 선택 영역 우클릭 → **Copy Selection as Markdown**
+- HTML → Markdown 직관적 아이콘 (문서 + MD)
 
 ## 향후 확장 (미구현, 구조만 고려)
 
 | 후보 | 설명 |
 |------|------|
-| A | 선택 영역 우클릭 → Copy Selection as Markdown |
 | B | 현재 페이지 전체 Markdown 변환 |
 | C | ChatGPT 답변 DOM 자동 추출 |
 | D | 단축키 `Ctrl+Shift+M` 즉시 복사 |
